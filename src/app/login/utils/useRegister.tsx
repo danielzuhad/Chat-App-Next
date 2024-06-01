@@ -6,6 +6,7 @@ import { register } from "./registerAction";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { RegisterFormProps } from "../components/RegisterForm";
+import { signIn } from "next-auth/react";
 
 const useRegister = ({ handleChangeVariant }: RegisterFormProps) => {
   const registerForm = useForm<z.infer<typeof registerSchema>>({
@@ -30,6 +31,16 @@ const useRegister = ({ handleChangeVariant }: RegisterFormProps) => {
     },
   });
 
+  const googleMutation = useMutation({
+    mutationFn: () => signIn("google"),
+    onSuccess: () => {
+      toast.success("Login successful");
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
+
   const onSubmit: SubmitHandler<z.infer<typeof registerSchema>> = async (
     data
   ) => {
@@ -37,14 +48,14 @@ const useRegister = ({ handleChangeVariant }: RegisterFormProps) => {
   };
 
   const isPending = () => {
-    if (registerMutation.isPending) {
+    if (registerMutation.isPending || googleMutation.isPending) {
       return true;
     } else {
       return false;
     }
   };
 
-  return { registerForm, onSubmit, isPending };
+  return { registerForm, onSubmit, isPending, googleMutation };
 };
 
 export default useRegister;

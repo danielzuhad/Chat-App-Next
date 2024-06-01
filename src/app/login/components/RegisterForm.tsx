@@ -19,7 +19,7 @@ export interface RegisterFormProps {
 }
 
 const RegisterForm = ({ handleChangeVariant }: RegisterFormProps) => {
-  const { registerForm, onSubmit, isPending } = useRegister({
+  const { registerForm, onSubmit, isPending, googleMutation } = useRegister({
     handleChangeVariant,
   });
 
@@ -93,6 +93,7 @@ const RegisterForm = ({ handleChangeVariant }: RegisterFormProps) => {
         </form>
 
         <AuthButton
+          onClick={() => googleMutation.mutate()}
           disabled={isPending()}
           className="text-black w-full rounded-sm mt-3"
           variant={"outline"}
