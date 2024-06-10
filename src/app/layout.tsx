@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import ToastifyWrapper from "../context/ToastifyWrapper";
 import QueryWrapper from "@/context/QueryWrapper";
+import Navbar from "@/components/Navbar/Navbar";
+import LayoutWrapper from "@/layout/LayoutWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,9 +27,14 @@ export default function RootLayout({
     <html lang="en">
       <QueryWrapper>
         <body
-          className={`${poppins.className} w-full min-h-screen flex justify-center items-center`}
+          className={`${poppins.className} flex min-h-screen w-full items-center justify-center bg-[#f8f8f8]`}
         >
-          <ToastifyWrapper>{children}</ToastifyWrapper>
+          <ToastifyWrapper>
+            <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
+              <Navbar />
+              {children}
+            </LayoutWrapper>
+          </ToastifyWrapper>
         </body>
       </QueryWrapper>
     </html>

@@ -11,7 +11,7 @@ const LayoutWrapper = ({ children, className }: LayoutWrapperProps) => {
     <>
       <main
         className={cn(
-          "container glass h-screen sm:h-[95vh] rounded-sm flex flex-col justify-center items-center",
+          "container bg-backgroundn  h-screen sm:h-[95vh] sm:rounded-sm flex flex-col justify-center items-center",
           className
         )}
       >
