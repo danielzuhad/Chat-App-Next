@@ -22,8 +22,6 @@ export const login = async (data: z.infer<typeof loginSchema>) => {
       callbackUrl: "/",
     });
 
-    console.log({ response });
-
     return response;
   } catch (error) {
     if (error instanceof AxiosError) {

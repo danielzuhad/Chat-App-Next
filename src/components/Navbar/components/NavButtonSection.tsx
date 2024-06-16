@@ -10,6 +10,7 @@ const NavButtonSection = () => {
     <>
       {routes.map((route) => (
         <NavButton
+          onClick={route.onClick}
           key={route.label}
           icon={route.icon}
           label={route.label}

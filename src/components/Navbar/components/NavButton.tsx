@@ -10,18 +10,26 @@ interface NavButtonProps {
   label: string;
   href: string;
   className?: string;
+  onClick?: () => void;
 }
 
-const NavButton = ({ icon, label, href, className }: NavButtonProps) => {
+const NavButton = ({
+  icon,
+  label,
+  href,
+  className,
+  onClick,
+}: NavButtonProps) => {
   const pathname = usePathname();
 
   return (
     <>
-      {href === "/logout" && (
+      {label === "Logout" && (
         <div className="my-5 w-full rounded-sm border-[1px] border-primary/5 max-sm:hidden" />
       )}
 
       <Link
+        onClick={onClick}
         href={href}
         className={cn(
           "flex w-full flex-col items-center justify-center gap-y-0.5 rounded-[6px] py-1 hover:cursor-pointer hover:bg-primary/10 sm:py-2 md:flex-row md:justify-start md:gap-x-2 md:pl-2 lg:pl-4",

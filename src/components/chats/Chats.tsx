@@ -1,4 +1,4 @@
-import ChatBox from "./ChatBox";
+import UserBox from "../box/UserBox";
 
 const Chats = async () => {
   return (
@@ -8,10 +8,10 @@ const Chats = async () => {
       </p>
 
       <div className="flex w-full flex-col">
-        <ChatBox />
-        <ChatBox className="bg-primary/5" />
-        <ChatBox />
-        <ChatBox />
+        <UserBox showLastMessage={false} showEmail={true} />
+        <UserBox className="bg-[#f8f8f8]/80" />
+        <UserBox />
+        <UserBox />
       </div>
     </>
   );

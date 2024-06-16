@@ -1,6 +1,7 @@
 "use client";
 
 import { BookUser, LogOut, MessageSquare } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React from "react";
 
@@ -22,7 +23,7 @@ const useNavbar = () => {
           <MessageSquare
             strokeWidth={1.5}
             color={pathname === "/" ? "#FAFAFA" : "#18181b"}
-            size={28}
+            size={24}
           />
         ),
         href: "/",
@@ -33,7 +34,7 @@ const useNavbar = () => {
           <BookUser
             strokeWidth={1.5}
             color={pathname === "/friends" ? "#FAFAFA" : "#18181b"}
-            size={28}
+            size={24}
           />
         ),
         href: "/friends",
@@ -43,17 +44,15 @@ const useNavbar = () => {
         icon: (
           <LogOut
             strokeWidth={1.5}
-            size={28}
+            size={24}
             color={pathname === "/login" ? "#FAFAFA" : "#18181b"}
           />
         ),
-        href: "/logout",
-        onClick: () => {
-          // handle logout logic here
-        },
+        href: "",
+        onClick: signOut,
       },
     ],
-    [pathname]
+    [pathname],
   );
 
   return {

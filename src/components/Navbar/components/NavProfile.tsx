@@ -9,7 +9,7 @@ const NavProfile = async () => {
   return (
     <>
       <ImageLayout username={session?.user?.name as string}>
-        <NavImage src={session?.user?.image as string} />
+        <NavImage src={(session?.user?.image as string) || "/profile.svg"} />
       </ImageLayout>
     </>
   );
