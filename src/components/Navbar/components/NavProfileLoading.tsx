@@ -4,8 +4,8 @@ import NavImage from "./NavImage";
 const NavProfileLoading = () => {
   return (
     <>
-      <ImageLayout>
-        <NavImage src="/profile.svg" className=" bg-gray-300 animate-pulse" />
+      <ImageLayout className="relative">
+        <NavImage src="/profile.svg" className="animate-pulse bg-gray-300" />
       </ImageLayout>
     </>
   );

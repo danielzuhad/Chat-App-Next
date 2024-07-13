@@ -5,11 +5,12 @@ import ImageLayout from "../layout/ImageLayout";
 
 const NavProfile = async () => {
   const session = await getServerSession(authOptions);
+  const user = session?.user;
 
   return (
     <>
-      <ImageLayout username={session?.user?.name as string}>
-        <NavImage src={(session?.user?.image as string) || "/profile.svg"} />
+      <ImageLayout username={user?.name as string}>
+        <NavImage src={user?.image ? user?.image : "/profile.svg"} />
       </ImageLayout>
     </>
   );

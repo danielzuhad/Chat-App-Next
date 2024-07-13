@@ -1,7 +1,12 @@
+import Loading from "@/components/loading/Loading";
+import LayoutWrapper from "@/layout/LayoutWrapper";
+
 const loading = () => {
   return (
     <>
-      <div>loading...</div>
+      <LayoutWrapper>
+        <Loading />
+      </LayoutWrapper>
     </>
   );
 };

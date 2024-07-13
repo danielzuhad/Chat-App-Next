@@ -1,6 +1,6 @@
 "use client";
 
-import { BookUser, LogOut, MessageSquare } from "lucide-react";
+import { LogOut, MessageSquare, UserRoundSearch } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -31,10 +31,10 @@ const useNavbar = () => {
       {
         label: "Friends",
         icon: (
-          <BookUser
+          <UserRoundSearch
             strokeWidth={1.5}
-            color={pathname === "/friends" ? "#FAFAFA" : "#18181b"}
             size={24}
+            color={pathname === "/friends" ? "#FAFAFA" : "#18181b"}
           />
         ),
         href: "/friends",

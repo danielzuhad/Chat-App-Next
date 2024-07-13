@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { login } from "./loginAction";
+import { login } from "../actions/loginAction";
 import { signIn } from "next-auth/react";
 
 const useLogin = () => {

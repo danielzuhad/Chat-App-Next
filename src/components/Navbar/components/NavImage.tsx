@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import LoadingLayerImage from "@/components/loading/LoadingLayerImage";
 import { cn } from "@/lib/utils";
 
 interface NavImageProps {
@@ -9,7 +10,8 @@ interface NavImageProps {
 const NavImage = ({ src, className }: NavImageProps) => {
   return (
     <>
-      <div className="flex w-full items-center justify-center">
+      <div className="relative flex w-full items-center justify-center">
+        {!src && <LoadingLayerImage />}
         <img
           src={src}
           className={cn(

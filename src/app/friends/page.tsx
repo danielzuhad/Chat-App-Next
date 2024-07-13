@@ -1,15 +1,17 @@
-import Search from "@/components/search/Search";
 import LayoutWrapper from "@/layout/LayoutWrapper";
+import SearchSection from "./components/SearchSection";
 
 const Friends = () => {
   return (
     <>
-      <LayoutWrapper className="justify-start border-2 p-2 px-3">
-        <h1 className="mt-24 text-center text-xl font-medium xl:text-2xl">
-          Search friends for start a chat
-        </h1>
+      <LayoutWrapper className="justify-start">
+        <div className="h-full w-full p-2 px-8 sm:px-14 lg:px-24 xl:px-36 2xl:px-60">
+          <h1 className="mt-24 text-center text-xl font-medium xl:text-2xl">
+            Search friends for start a chat
+          </h1>
 
-        <Search className="mt-5" />
+          <SearchSection />
+        </div>
       </LayoutWrapper>
     </>
   );

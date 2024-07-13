@@ -1,7 +1,8 @@
 import { authOptions } from "@/lib/authOptions";
+import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 
-export const getUsersChat = async () => {
+export const getUsers = async () => {
   const session = await getServerSession(authOptions);
 
   if (session?.user?.email) {
@@ -9,7 +10,7 @@ export const getUsersChat = async () => {
   }
 
   try {
-    const users = await prisma?.user.findMany({
+    const users = await db.user.findMany({
       orderBy: {
         createdAt: "desc",
       },
@@ -23,6 +24,8 @@ export const getUsersChat = async () => {
 
     return users;
   } catch (error) {
+    console.log({ error });
+
     return [];
   }
 };

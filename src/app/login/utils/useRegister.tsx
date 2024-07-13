@@ -2,7 +2,7 @@ import { registerSchema } from "@/schemas";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { register } from "./registerAction";
+import { register } from "../actions/registerAction";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { RegisterFormProps } from "../components/RegisterForm";
@@ -42,7 +42,7 @@ const useRegister = ({ handleChangeVariant }: RegisterFormProps) => {
   });
 
   const onSubmit: SubmitHandler<z.infer<typeof registerSchema>> = async (
-    data
+    data,
   ) => {
     await registerMutation.mutate(data);
   };

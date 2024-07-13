@@ -1,9 +1,11 @@
+import LayoutWrapper from "@/layout/LayoutWrapper";
+
 const Loading = () => {
   return (
     <>
-      <div className="flex h-full w-full items-center justify-center">
-        Loading...
-      </div>
+      <LayoutWrapper>
+        <p>Loading...</p>
+      </LayoutWrapper>
     </>
   );
 };
