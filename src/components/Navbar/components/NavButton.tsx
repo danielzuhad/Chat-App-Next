@@ -41,7 +41,7 @@ const NavButton = ({
         <div>{icon}</div>
         <p
           className={cn(
-            "visible text-sm font-normal text-primary sm:text-xs",
+            "visible text-sm font-medium text-primary sm:text-xs",
             pathname === href && "dark text-primary",
           )}
         >

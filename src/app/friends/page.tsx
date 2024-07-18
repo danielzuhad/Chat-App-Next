@@ -1,7 +1,7 @@
 import LayoutWrapper from "@/layout/LayoutWrapper";
 import SearchSection from "./components/SearchSection";
 
-const Friends = () => {
+const Friends = async () => {
   return (
     <>
       <LayoutWrapper className="justify-start">

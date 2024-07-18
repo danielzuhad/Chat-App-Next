@@ -24,12 +24,13 @@ const LoadingUserList = ({
   className,
   ...props
 }: LoadingUserListProps) => {
-  const loadingBoxes = Array.from({ length: 6 });
+  const loadingBoxes = Array.from({ length: variant === "Chats" ? 6 : 10 });
 
   return (
     <>
       {loadingBoxes.map((_, index) => (
         <LoadingUserBox
+          user={undefined}
           key={index}
           className={cn(LoadingUserListVariants({ className, variant }))}
           {...props}

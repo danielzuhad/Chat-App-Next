@@ -3,15 +3,13 @@
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
 import { Search as SearchIcon } from "lucide-react";
-import useSearch from "@/hooks/useSearch";
 
 interface SearchProps {
   className?: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Search = ({ className }: SearchProps) => {
-  const { debouncedSearch, setSearch } = useSearch();
-
+const Search = ({ className, setSearch }: SearchProps) => {
   return (
     <>
       <div
