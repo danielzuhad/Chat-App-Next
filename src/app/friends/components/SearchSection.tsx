@@ -12,7 +12,7 @@ const SearchSection = () => {
   return (
     <>
       <div className="mt-5 w-full">
-        <Search setSearch={setSearch} />
+        <Search setSearch={setSearch} placeholder="at least 3 letters" />
 
         <UsersSection
           debouncedSearch={debouncedSearch}

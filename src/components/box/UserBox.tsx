@@ -24,8 +24,6 @@ const UserBox = ({
   user,
   ...props
 }: UserBoxProps) => {
-  console.log({ user });
-
   const userConditional = (type: string) => {
     if (user) {
       switch (type) {
@@ -58,10 +56,10 @@ const UserBox = ({
         className={cn(
           "flex w-full flex-col items-center justify-center rounded-[2px] pt-3 hover:cursor-pointer hover:bg-card-hover",
           className,
-          { ...props },
         )}
+        {...props}
       >
-        <div className="flex w-full flex-col items-center px-3">
+        <div className="flex w-full flex-col items-center px-1.5 md:px-3">
           {/* Profile & Name */}
           <div className="flex w-full flex-col items-center md:flex-row md:justify-center">
             {showIcon && (
@@ -76,7 +74,7 @@ const UserBox = ({
             )}
             <div className="flex h-full w-full flex-col justify-between py-2 md:pl-2">
               {/* Name */}
-              <p className="font-sm w-full text-start text-base font-medium text-primary/70">
+              <p className="font-sm line-clamp-1 w-full text-start text-base font-medium text-primary/70">
                 {showContent && (userConditional("name") as string)}
               </p>
               {/* Chat*/}
@@ -97,7 +95,7 @@ const UserBox = ({
 
         {/* Border */}
         {showBorder && (
-          <div className="flex w-full justify-center px-3 md:mt-3">
+          <div className="flex w-full justify-center px-1.5 md:mt-3 md:px-3">
             <div className="w-full border-b-[1px] border-primary/5" />
           </div>
         )}

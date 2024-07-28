@@ -4,27 +4,18 @@ import { authOptions } from "@/lib/authOptions";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 
-export const searchUsers = async (searchQuery: string) => {
+export const getCurrentUser = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.email) {
-    throw new Error("You are not logged in");
-  }
-
-  const users = await db.user.findMany({
+  const uniqueUser = await db.user.findUnique({
     where: {
-      name: {
-        contains: searchQuery,
-      },
-      email: {
-        not: session.user.email,
-      },
+      email: session?.user?.email as string,
     },
   });
 
-  if (!users) {
-    throw new Error("No users found");
+  if (!uniqueUser) {
+    throw new Error("User not found");
   }
 
-  return users;
+  return uniqueUser;
 };
