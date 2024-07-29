@@ -8,9 +8,15 @@ interface SearchProps {
   className?: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
+  iconSize?: number;
 }
 
-const Search = ({ className, setSearch, placeholder }: SearchProps) => {
+const Search = ({
+  className,
+  setSearch,
+  placeholder,
+  iconSize = 24,
+}: SearchProps) => {
   return (
     <>
       <div
@@ -28,7 +34,7 @@ const Search = ({ className, setSearch, placeholder }: SearchProps) => {
         />
 
         <div className="pl-2">
-          <SearchIcon strokeWidth={1.5} color={"#18181b"} size={24} />
+          <SearchIcon strokeWidth={1.5} color={"#18181b"} size={iconSize} />
         </div>
       </div>
     </>

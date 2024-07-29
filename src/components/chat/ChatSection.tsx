@@ -1,28 +1,28 @@
 "use client";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
-import { redirect } from "next/navigation";
+import { Session } from "next-auth";
 import useUserChat from "./hooks/useUserChat";
 import SearchChatSection from "./SearchChatSection";
 
-interface ChatSectionProps {}
+interface ChatSectionProps {
+  session: Session;
+}
 
-const ChatSection = async ({}: ChatSectionProps) => {
-  const { conversationsQuery } = useUserChat();
+const ChatSection = ({ session }: ChatSectionProps) => {
+  const { conversationsQuery, setSearch, searchConversationsQuery } =
+    useUserChat();
 
   const conversations = conversationsQuery.data ?? [];
-  const session = await getServerSession(authOptions);
 
-  if (!session) {
-    redirect("/login");
-  }
+  const loadingList = conversationsQuery.isLoading;
 
   return (
     <>
       <SearchChatSection
+        loadingList={loadingList}
+        setSearch={setSearch}
         conversations={conversations}
-        currentUser={getCurrentUser}
+        currentUser={session}
       />
       <div className="h-full w-full border-[1px]">Messages</div>
     </>

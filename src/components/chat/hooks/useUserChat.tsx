@@ -9,13 +9,23 @@ const useUserChat = () => {
 
   const debouncedSearch = useDebounce(search, 400);
 
+  // console.log({ debouncedSearch });
+
   const searchConversationsQuery = useQuery({
     queryKey: ["search", debouncedSearch],
-    queryFn: async (query) => {
-      const response = await searchConversationAction(debouncedSearch);
+    queryFn: async () => {
+      if (debouncedSearch.length >= 3) {
+        return [];
+      }
 
+      const response = await searchConversationAction(debouncedSearch);
       return response;
     },
+
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    enabled: !!debouncedSearch,
   });
 
   const conversationsQuery = useQuery({
@@ -24,9 +34,13 @@ const useUserChat = () => {
       const response = await getConversations();
       return response;
     },
+
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   });
 
-  return { conversationsQuery };
+  return { conversationsQuery, searchConversationsQuery, setSearch };
 };
 
 export default useUserChat;

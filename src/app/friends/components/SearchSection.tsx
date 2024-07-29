@@ -7,7 +7,7 @@ import useSearch from "../hooks/useSearch";
 const SearchSection = () => {
   const { debouncedSearch, setSearch, searchQuery } = useSearch();
 
-  const { data, isLoading } = searchQuery;
+  const { data, isLoading, status } = searchQuery;
 
   return (
     <>

@@ -11,16 +11,18 @@ const useSearch = () => {
   const debouncedSearch = useDebounce(search, 400);
 
   const searchQuery = useQuery({
-    queryKey: ["search", debouncedSearch],
+    queryKey: ["search", search],
     queryFn: async () => {
-      if (!debouncedSearch) {
-        return []; // return an empty array if debouncedSearch is empty
+      if (debouncedSearch.length >= 3) {
+        return [];
       }
 
       const response = await searchUsers(debouncedSearch);
       return response;
     },
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
     enabled: !!debouncedSearch,
   });
 
