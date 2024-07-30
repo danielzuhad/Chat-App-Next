@@ -4,21 +4,20 @@ import useDebounce from "@/hooks/useDebounce";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-const useUserChat = () => {
+const useChat = () => {
   const [search, setSearch] = React.useState<string>("");
 
   const debouncedSearch = useDebounce(search, 400);
 
-  // console.log({ debouncedSearch });
-
   const searchConversationsQuery = useQuery({
     queryKey: ["search", debouncedSearch],
     queryFn: async () => {
-      if (debouncedSearch.length >= 3) {
+      if (!debouncedSearch) {
         return [];
       }
 
       const response = await searchConversationAction(debouncedSearch);
+      console.log({ response });
       return response;
     },
 
@@ -36,11 +35,9 @@ const useUserChat = () => {
     },
 
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
   });
 
   return { conversationsQuery, searchConversationsQuery, setSearch };
 };
 
-export default useUserChat;
+export default useChat;

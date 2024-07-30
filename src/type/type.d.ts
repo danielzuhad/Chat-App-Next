@@ -1,4 +1,4 @@
-import { Message, User } from "@prisma/client";
+import { User } from "@prisma/client";
 
 export interface ConversationWithRelations {
   id: string;
@@ -6,6 +6,6 @@ export interface ConversationWithRelations {
   lastMessageAt: Date;
   name: string | null;
   isGroup: boolean | null;
-  messages: Message[];
   users: User[];
+  // usersId: string[];
 }

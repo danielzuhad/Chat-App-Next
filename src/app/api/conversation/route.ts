@@ -88,7 +88,7 @@ export async function POST(request: Request) {
           message: "Conversation already exists",
           available: true,
         }),
-        { status: 200 },
+        { status: 300 },
       );
     }
 

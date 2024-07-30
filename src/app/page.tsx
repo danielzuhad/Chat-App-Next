@@ -1,4 +1,4 @@
-import ChatSection from "@/components/chat/ChatSection";
+import ChatSection from "@/components/chat/chat-list/ChatSection";
 import LayoutWrapper from "@/layout/LayoutWrapper";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";

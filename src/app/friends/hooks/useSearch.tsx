@@ -2,18 +2,26 @@ import React from "react";
 import useDebounce from "../../../hooks/useDebounce";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { searchUsers } from "@/actions/searchUserAction";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { ConversationBodyType } from "@/app/api/conversation/route";
+import toast from "react-hot-toast";
+import { ConversationErrorResponse } from "@/app/api/type/response";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { ConversationWithRelations } from "@/type/type";
+import { setConversation } from "@/redux/features/chat/chatSlice";
 
 const useSearch = () => {
   const [search, setSearch] = React.useState<string>("");
+  const dispatch = useDispatch();
+  const route = useRouter();
 
   const debouncedSearch = useDebounce(search, 400);
 
   const searchQuery = useQuery({
     queryKey: ["search", search],
     queryFn: async () => {
-      if (debouncedSearch.length >= 3) {
+      if (!debouncedSearch) {
         return [];
       }
 
@@ -33,6 +41,22 @@ const useSearch = () => {
       });
 
       return response;
+    },
+
+    onError: (error: AxiosError<ConversationErrorResponse>) => {
+      if (error.response?.data) {
+        toast.error(error.response.data.message);
+      } else if (error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+
+    onSuccess: (response: AxiosResponse<ConversationWithRelations>) => {
+      toast.success("conversation created");
+      dispatch(setConversation(response.data.id));
+      route.push("/");
     },
   });
 

@@ -1,7 +1,7 @@
-import LoadingUserList from "../box/Loading/LoadingUserList";
+import LoadingUserList from "../../box/Loading/LoadingUserList";
 import { Session } from "next-auth";
 import { ConversationWithRelations } from "@/type/type";
-import UserBox from "../box/UserBox";
+import UserBox from "../../box/UserBox";
 
 interface ChatListProps {
   conversations: ConversationWithRelations[];

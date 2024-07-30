@@ -2,5 +2,6 @@
   "WillLuke.nextjs.hasPrompted": true,
   "editor.minimap.scale": 1,
   "editor.minimap.renderCharacters": false,
-  "editor.cursorSmoothCaretAnimation": "on"
+  "editor.cursorSmoothCaretAnimation": "on",
+  "workbench.sideBar.location": "right"
 }

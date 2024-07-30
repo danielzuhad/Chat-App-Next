@@ -12,20 +12,15 @@ export const searchConversationAction = async (searchQuery: string) => {
   }
 
   const conversations = await db.conversation.findMany({
+    orderBy: {
+      lastMessageAt: "desc",
+    },
+
     where: {
       users: {
         some: {
           name: {
             contains: searchQuery,
-            mode: "insensitive",
-          },
-        },
-      },
-
-      NOT: {
-        users: {
-          some: {
-            email: session.user.email,
           },
         },
       },
@@ -33,17 +28,10 @@ export const searchConversationAction = async (searchQuery: string) => {
 
     include: {
       users: true,
-      messages: {
-        include: {
-          sender: true,
-          seen: true,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
     },
   });
+
+  console.log({ conversations });
 
   return conversations;
 };

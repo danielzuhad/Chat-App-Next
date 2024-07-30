@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import LayoutWrapper from "@/layout/LayoutWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
+import ReduxWrapper from "@/components/chat/context/ReduxWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,10 +35,12 @@ export default async function RootLayout({
           className={`${poppins.className} flex min-h-screen w-full items-center justify-center bg-[#f8f8f8]`}
         >
           <ToastifyWrapper>
-            <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
-              {session?.user?.name && <Navbar />}
-              {children}
-            </LayoutWrapper>
+            <ReduxWrapper>
+              <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
+                {session?.user?.name && <Navbar />}
+                {children}
+              </LayoutWrapper>
+            </ReduxWrapper>
           </ToastifyWrapper>
         </body>
       </QueryWrapper>
