@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import UsersList from "./UsersList";
+import UserList from "./UserList";
 
 interface UsersSectionProps {
   users: User[] | undefined;
@@ -20,7 +20,7 @@ const UsersSection = ({
         {noUsersFound ? (
           <p className="text-primary/50">Tidak ada user ditemukan</p>
         ) : (
-          <UsersList isLoading={isLoading} users={users} />
+          <UserList isLoading={isLoading} users={users} />
         )}
       </div>
     </>

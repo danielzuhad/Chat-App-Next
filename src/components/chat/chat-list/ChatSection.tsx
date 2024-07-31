@@ -1,9 +1,9 @@
 "use client";
 
+import React from "react";
 import { Session } from "next-auth";
 import SearchChatSection from "./SearchChatSection";
 import useChat from "../hooks/useChat";
-import React from "react";
 import UserChatSection from "../user-chat/UserChatSection";
 
 interface ChatSectionProps {
@@ -25,8 +25,10 @@ const ChatSection = ({ session }: ChatSectionProps) => {
       : conversations;
   }, [conversations, searchConversationsQuery.data]);
 
-  const loadingList =
-    conversationsQuery.isLoading || searchConversationsQuery.isLoading;
+  const loadingList = React.useMemo(
+    () => conversationsQuery.isLoading || searchConversationsQuery.isLoading,
+    [conversationsQuery.isLoading, searchConversationsQuery.isLoading],
+  );
 
   return (
     <>
@@ -36,6 +38,7 @@ const ChatSection = ({ session }: ChatSectionProps) => {
         conversations={searchedConversations}
         currentUser={session}
       />
+
       <UserChatSection />
     </>
   );

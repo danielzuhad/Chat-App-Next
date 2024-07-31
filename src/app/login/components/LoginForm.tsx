@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import AuthButton from "./AuthButton";
 import { IoLogoGoogle } from "react-icons/io5";
-import useLogin from "../utils/useLogin";
+import useLogin from "../hooks/useLogin";
 
 interface LoginFormProps {}
 
@@ -62,7 +62,7 @@ const LoginForm = ({}: LoginFormProps) => {
           <Button
             disabled={isPending()}
             type="submit"
-            className="w-full rounded-sm mt-6 font-normal"
+            className="mt-6 w-full rounded-sm font-normal"
           >
             Login
           </Button>
@@ -71,7 +71,7 @@ const LoginForm = ({}: LoginFormProps) => {
         <AuthButton
           onClick={() => googleMutation.mutate()}
           disabled={isPending()}
-          className="text-black w-full rounded-sm mt-3"
+          className="mt-3 w-full rounded-sm text-black"
           variant={"outline"}
           label="Login with Google"
           icon={<IoLogoGoogle />}

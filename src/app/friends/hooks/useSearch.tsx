@@ -5,10 +5,13 @@ import { searchUsers } from "@/actions/searchUserAction";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ConversationBodyType } from "@/app/api/conversation/route";
 import toast from "react-hot-toast";
-import { ConversationErrorResponse } from "@/app/api/type/response";
+import {
+  ApiConversationResponseType,
+  ConversationErrorResponseType,
+} from "@/app/api/type/response";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { ConversationWithRelations } from "@/type/type";
+import { ConversationWithRelationsType } from "@/type/type";
 import { setConversation } from "@/redux/features/chat/chatSlice";
 
 const useSearch = () => {
@@ -19,7 +22,7 @@ const useSearch = () => {
   const debouncedSearch = useDebounce(search, 400);
 
   const searchQuery = useQuery({
-    queryKey: ["search", search],
+    queryKey: ["search", debouncedSearch],
     queryFn: async () => {
       if (!debouncedSearch) {
         return [];
@@ -43,7 +46,7 @@ const useSearch = () => {
       return response;
     },
 
-    onError: (error: AxiosError<ConversationErrorResponse>) => {
+    onError: (error: AxiosError<ConversationErrorResponseType>) => {
       if (error.response?.data) {
         toast.error(error.response.data.message);
       } else if (error.message) {
@@ -53,22 +56,28 @@ const useSearch = () => {
       }
     },
 
-    onSuccess: (response: AxiosResponse<ConversationWithRelations>) => {
+    onSuccess: (
+      response: AxiosResponse<
+        ApiConversationResponseType<ConversationWithRelationsType>
+      >,
+    ) => {
       toast.success("conversation created");
-      dispatch(setConversation(response.data.id));
+      dispatch(setConversation(response.data.data.id));
       route.push("/");
     },
   });
 
-  const handleConversation = (params: ConversationBodyType) => {
-    conversationMutation.mutate({
-      userId: params.userId,
-      isGroup: params.isGroup,
-      members: params.members,
-      name: params.name,
-    });
-  };
-
+  const handleConversation = React.useCallback(
+    (params: ConversationBodyType) => {
+      conversationMutation.mutate({
+        userId: params.userId,
+        isGroup: params.isGroup,
+        members: params.members,
+        name: params.name,
+      });
+    },
+    [],
+  );
   const conversationMutattionPending = conversationMutation.isPending;
 
   return {

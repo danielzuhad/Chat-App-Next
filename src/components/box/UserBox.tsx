@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import React from "react";
 import { cn } from "@/lib/utils";
 import { User } from "@prisma/client";
 
@@ -51,57 +52,54 @@ const UserBox = ({
   };
 
   return (
-    <>
-      <div
-        className={cn(
-          "flex w-full flex-col items-center justify-center rounded-[2px] pt-3 hover:cursor-pointer hover:bg-card-hover",
-          className,
-        )}
-        {...props}
-      >
-        <div className="flex w-full flex-col items-center px-1.5 md:px-3">
-          {/* Profile & Name */}
-          <div className="flex w-full flex-col items-center md:flex-row md:justify-center">
-            {showIcon && (
-              <img
-                src={userConditional("image") as string}
-                alt=""
-                className={cn(
-                  "mb-0.5 aspect-square w-[80%] rounded-sm sm:w-[60%] md:w-[45%] md:rounded-full lg:w-[25%] xl:w-[25%]",
-                  classNameImage,
-                )}
-              />
+    <div
+      className={cn(
+        "flex w-full flex-col items-center justify-center rounded-[2px] pt-3 hover:cursor-pointer hover:bg-card-hover",
+        className,
+      )}
+      {...props}
+    >
+      <div className="flex w-full flex-col items-center px-1.5 md:px-3">
+        {/* Profile & Name */}
+        <div className="flex w-full flex-col items-center md:flex-row md:justify-center">
+          {showIcon && (
+            <img
+              src={userConditional("image") as string}
+              alt=""
+              className={cn(
+                "mb-0.5 aspect-square w-[80%] rounded-sm sm:w-[60%] md:w-[45%] md:rounded-full lg:w-[25%] xl:w-[25%]",
+                classNameImage,
+              )}
+            />
+          )}
+          <div className="flex h-full w-full flex-col justify-between py-2 md:pl-2">
+            {/* Name */}
+            <p className="font-sm line-clamp-1 w-full text-start text-base font-medium text-primary/70">
+              {showContent && (userConditional("name") as string)}
+            </p>
+            {/* Chat */}
+            {showLastMessage && (
+              <div className="text-xs font-normal text-primary/50 max-md:hidden">
+                testttttt
+              </div>
             )}
-            <div className="flex h-full w-full flex-col justify-between py-2 md:pl-2">
-              {/* Name */}
-              <p className="font-sm line-clamp-1 w-full text-start text-base font-medium text-primary/70">
-                {showContent && (userConditional("name") as string)}
-              </p>
-              {/* Chat*/}
-              {showLastMessage && (
-                <div className="text-xs font-normal text-primary/50 max-md:hidden">
-                  testttttt
-                </div>
-              )}
-              {/* Email*/}
-              {showEmail && (
-                <div className="text-xs font-medium text-primary/50 max-md:hidden">
-                  {showContent && (userConditional("email") as string)}
-                </div>
-              )}
-            </div>
+            {/* Email */}
+            {showEmail && (
+              <div className="text-xs font-medium text-primary/50 max-md:hidden">
+                {showContent && (userConditional("email") as string)}
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Border */}
-        {showBorder && (
-          <div className="flex w-full justify-center px-1.5 md:mt-3 md:px-3">
-            <div className="w-full border-b-[1px] border-primary/5" />
-          </div>
-        )}
       </div>
-    </>
+
+      {/* Border */}
+      {showBorder && (
+        <div className="flex w-full justify-center px-1.5 md:mt-3 md:px-3">
+          <div className="w-full border-b-[1px] border-primary/5" />
+        </div>
+      )}
+    </div>
   );
 };
-
 export default UserBox;

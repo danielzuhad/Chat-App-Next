@@ -1,9 +1,11 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { LogOut, MessageSquare, UserRoundSearch } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 
 export type RouteType = {
   label: string;
@@ -14,6 +16,18 @@ export type RouteType = {
 
 const useNavbar = () => {
   const pathname = usePathname();
+
+  const signOutMutation = useMutation({
+    mutationFn: async () => await signOut(),
+
+    onSuccess: () => {
+      toast.success("Logout successful");
+    },
+
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
 
   const routes: RouteType[] = React.useMemo(
     () => [
@@ -49,7 +63,7 @@ const useNavbar = () => {
           />
         ),
         href: "",
-        onClick: signOut,
+        onClick: signOutMutation.mutate,
       },
     ],
     [pathname],

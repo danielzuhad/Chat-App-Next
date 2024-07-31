@@ -7,8 +7,11 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { login } from "../actions/loginAction";
 import { signIn } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const useLogin = () => {
+  const path = usePathname();
+
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -33,8 +36,10 @@ const useLogin = () => {
 
   const googleMutation = useMutation({
     mutationFn: () => signIn("google"),
-    onSuccess: () => {
-      toast.success("Login successful");
+    onSuccess: async (response) => {
+      if (response?.ok) {
+        toast.success("Login successful");
+      }
     },
     onError: () => {
       toast.error("Something went wrong");

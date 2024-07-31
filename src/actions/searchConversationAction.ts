@@ -31,7 +31,5 @@ export const searchConversationAction = async (searchQuery: string) => {
     },
   });
 
-  console.log({ conversations });
-
   return conversations;
 };

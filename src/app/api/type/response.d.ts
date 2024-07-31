@@ -1,8 +1,14 @@
-import { ConversationWithRelations } from "@/type/type";
+import { ConversationWithRelationsType } from "@/type/type";
 
-export interface ConversationErrorResponse {
-  data?: ConversationWithRelations;
+export interface ConversationErrorResponseType {
+  data?: ConversationWithRelationsType;
   message: string;
   available: boolean;
   status: number;
+}
+
+export interface ApiConversationResponseType<T> {
+  data: T;
+  message: string;
+  available: boolean;
 }

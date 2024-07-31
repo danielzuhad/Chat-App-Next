@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 
-export interface ConversationWithRelations {
+export interface ConversationWithRelationsType {
   id: string;
   createdAt: Date;
   lastMessageAt: Date;

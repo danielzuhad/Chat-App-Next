@@ -1,10 +1,11 @@
 import LoadingUserList from "../../box/Loading/LoadingUserList";
 import { Session } from "next-auth";
-import { ConversationWithRelations } from "@/type/type";
+import { ConversationWithRelationsType } from "@/type/type";
 import UserBox from "../../box/UserBox";
+import useChat from "../hooks/useChat";
 
 interface ChatListProps {
-  conversations: ConversationWithRelations[];
+  conversations: ConversationWithRelationsType[];
   currentUser: Session;
   loadingList: boolean;
 }
@@ -14,6 +15,8 @@ const ChatList = ({
   currentUser,
   loadingList,
 }: ChatListProps) => {
+  const { conversationId, handleSetConversationId } = useChat();
+
   return (
     <>
       <div className="flex h-[80vh] w-full flex-col overflow-auto sm:h-full">
@@ -24,7 +27,9 @@ const ChatList = ({
         ) : (
           conversations.map((conversation, i) => (
             <UserBox
+              onClick={() => handleSetConversationId(conversation.id)}
               key={i}
+              className={`${conversationId === conversation.id && "bg-card-hover"} `}
               user={conversation.users.find(
                 (user) => user.name !== currentUser.user?.name,
               )}

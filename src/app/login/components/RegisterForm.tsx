@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import AuthButton from "./AuthButton";
 import { IoLogoGoogle } from "react-icons/io5";
-import useRegister from "../utils/useRegister";
+import useRegister from "../hooks/useRegister";
 
 export interface RegisterFormProps {
   handleChangeVariant: () => void;
@@ -86,7 +86,7 @@ const RegisterForm = ({ handleChangeVariant }: RegisterFormProps) => {
           <Button
             disabled={isPending()}
             type="submit"
-            className="w-full rounded-sm mt-6 font-normal"
+            className="mt-6 w-full rounded-sm font-normal"
           >
             Register
           </Button>
@@ -95,7 +95,7 @@ const RegisterForm = ({ handleChangeVariant }: RegisterFormProps) => {
         <AuthButton
           onClick={() => googleMutation.mutate()}
           disabled={isPending()}
-          className="text-black w-full rounded-sm mt-3"
+          className="mt-3 w-full rounded-sm text-black"
           variant={"outline"}
           label="Login with Google"
           icon={<IoLogoGoogle />}

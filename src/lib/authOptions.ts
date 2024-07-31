@@ -36,12 +36,11 @@ export const authOptions: NextAuthOptions = {
         const validatedCredentials = loginSchema.safeParse(credentials);
 
         if (validatedCredentials.success) {
-          const { email, password } = validatedCredentials.data;
+          const { email } = validatedCredentials.data;
 
           const user = await db.user.findUnique({
             where: {
               email,
-              password,
             },
           });
 
@@ -56,4 +55,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account && account.provider === "google") {
+        return true;
+      }
+      return true; // Allow sign in
+    },
+  },
 };

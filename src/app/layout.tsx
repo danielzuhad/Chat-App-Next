@@ -35,12 +35,10 @@ export default async function RootLayout({
           className={`${poppins.className} flex min-h-screen w-full items-center justify-center bg-[#f8f8f8]`}
         >
           <ToastifyWrapper>
-            <ReduxWrapper>
-              <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
-                {session?.user?.name && <Navbar />}
-                {children}
-              </LayoutWrapper>
-            </ReduxWrapper>
+            <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
+              {session?.user?.name && <Navbar />}
+              <ReduxWrapper>{children}</ReduxWrapper>
+            </LayoutWrapper>
           </ToastifyWrapper>
         </body>
       </QueryWrapper>
