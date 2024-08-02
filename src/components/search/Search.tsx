@@ -14,15 +14,6 @@ interface SearchProps {
 
 const Search = React.memo(
   ({ className, setSearch, placeholder, iconSize = 24 }: SearchProps) => {
-    const handleChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        // Update search state
-        setSearch(value);
-      },
-      [setSearch],
-    );
-
     return (
       <>
         <div
@@ -32,7 +23,7 @@ const Search = React.memo(
           )}
         >
           <Input
-            onChange={handleChange}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder={placeholder}
             className="h-full rounded-none border-none p-0"
           />

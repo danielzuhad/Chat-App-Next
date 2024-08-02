@@ -1,43 +1,19 @@
 "use client";
 
-import React from "react";
 import { Session } from "next-auth";
-import SearchChatSection from "./SearchChatSection";
-import useChat from "../hooks/useChat";
 import UserChatSection from "../user-chat/UserChatSection";
+import SearchChatSection from "./SearchChatSection";
 
 interface ChatSectionProps {
   session: Session;
 }
 
 const ChatSection = ({ session }: ChatSectionProps) => {
-  const { conversationsQuery, setSearch, searchConversationsQuery } = useChat();
-
-  const conversations = conversationsQuery.data ?? [];
-
-  const searchedConversations = React.useMemo(() => {
-    return searchConversationsQuery.data?.length
-      ? searchConversationsQuery.data.filter((searchedConversation) =>
-          conversations.some(
-            (conversation) => searchedConversation.id === conversation.id,
-          ),
-        )
-      : conversations;
-  }, [conversations, searchConversationsQuery.data]);
-
-  const loadingList = React.useMemo(
-    () => conversationsQuery.isLoading || searchConversationsQuery.isLoading,
-    [conversationsQuery.isLoading, searchConversationsQuery.isLoading],
-  );
-
   return (
     <>
-      <SearchChatSection
-        loadingList={loadingList}
-        setSearch={setSearch}
-        conversations={searchedConversations}
-        currentUser={session}
-      />
+      {/* <SearchChatSection currentUser={session} /> */}
+
+      <SearchChatSection currentUser={session} />
 
       <UserChatSection />
     </>
