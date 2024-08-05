@@ -15,7 +15,7 @@ const ChatSection = ({ session }: ChatSectionProps) => {
 
       <SearchChatSection currentUser={session} />
 
-      <UserChatSection />
+      <UserChatSection currentuser={session} />
     </>
   );
 };

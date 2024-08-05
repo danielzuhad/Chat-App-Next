@@ -3,5 +3,9 @@
   "editor.minimap.scale": 1,
   "editor.minimap.renderCharacters": false,
   "editor.cursorSmoothCaretAnimation": "on",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "editor.suggest.preview": false,
+  "workbench.editor.enablePreviewFromCodeNavigation": false,
+  "search.defaultViewMode": "list"
 }

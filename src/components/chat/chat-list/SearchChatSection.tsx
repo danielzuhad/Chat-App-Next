@@ -10,15 +10,20 @@ interface SearchChatSectionProps {
 }
 
 const SearchChatSection = ({ currentUser }: SearchChatSectionProps) => {
-  const conversationId = useSelector(
-    (state: RootState) => state.chat.conversationId,
+  const conversation = useSelector(
+    (state: RootState) => state.chat.conversation,
   );
 
-  const { setSearch, loadingList, searchedConversations } =
-    useSearchChat(conversationId);
+  const conversationId = conversation?.id ?? null;
+
+  const { setSearch, loadingList, searchedConversations } = useSearchChat(
+    conversationId ?? null,
+  );
+
+  console.log("search chat section rendered");
 
   return (
-    <div className="flex h-full w-28 flex-col items-center overflow-y-hidden pr-[2px] max-sm:border-b-[1px] sm:pr-0 md:w-[280px] lg:w-[350px] xl:w-[390px]">
+    <div className="flex h-full w-28 flex-col items-center overflow-y-hidden pr-[2px] max-sm:border-b-[1px] sm:w-[220px] sm:pr-0 md:w-[320px] lg:w-[450px] xl:w-[460px] 2xl:w-[550px]">
       <div className="mb-4 w-full px-1.5 max-md:hidden">
         <Search
           setSearch={setSearch}
@@ -28,7 +33,7 @@ const SearchChatSection = ({ currentUser }: SearchChatSectionProps) => {
       </div>
 
       <ChatList
-        conversationId={conversationId}
+        conversationState={conversation}
         loadingList={loadingList}
         conversations={searchedConversations}
         currentUser={currentUser}

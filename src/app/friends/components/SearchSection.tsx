@@ -9,6 +9,8 @@ const SearchSection = () => {
 
   const { data, isLoading, status } = searchQuery;
 
+  console.log({ data });
+
   return (
     <>
       <div className="mt-5 w-full">

@@ -15,6 +15,7 @@ export const searchUsers = async (searchQuery: string) => {
     where: {
       name: {
         contains: searchQuery,
+        mode: "insensitive",
       },
       email: {
         not: session.user.email,

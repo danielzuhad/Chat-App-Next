@@ -1,20 +1,37 @@
-import React from "react";
+import { RootState } from "@/redux/store/store";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import BlankChat from "./BlankChat";
+import UserChat from "./UserChat";
+import { Session } from "next-auth";
 
-const UserChatSection = React.memo(() => {
-  // const { conversationByIdQuery, memorizedConversationId } = useChat();
-  console.log("conversation");
+export interface UserChatSectionProps {
+  currentuser: Session;
+}
 
-  // const data = React.useMemo(
-  //   () => conversationByIdQuery.data,
-  //   [conversationByIdQuery.data],
-  // );
+const UserChatSection = ({ currentuser }: UserChatSectionProps) => {
+  const conversation = useSelector(
+    (state: RootState) => state.chat.conversation,
+  );
+
+  const anotherUser = useMemo(() => {
+    return conversation?.users.find(
+      (user) => user.name !== currentuser?.user?.name,
+    );
+  }, [conversation]);
 
   return (
-    <div className="h-full w-full border-[1px] p-2">
-      {/* ID : {memorizedConversationId} */}
-      conversation
+    <div className="h-full w-full rounded-[6px] border-[1px] p-2">
+      {conversation ? (
+        <UserChat
+          conversation={conversation}
+          user={anotherUser ? anotherUser : null}
+        />
+      ) : (
+        <BlankChat />
+      )}
     </div>
   );
-});
+};
 
 export default UserChatSection;

@@ -24,7 +24,7 @@ const LoadingUserList = ({
   className,
   ...props
 }: LoadingUserListProps) => {
-  const loadingBoxes = Array.from({ length: variant === "Chats" ? 6 : 10 });
+  const loadingBoxes = Array.from({ length: variant === "Chats" ? 8 : 10 });
 
   return (
     <>

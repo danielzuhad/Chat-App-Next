@@ -24,7 +24,7 @@ const useSearch = () => {
   const searchQuery = useQuery({
     queryKey: ["search", debouncedSearch],
     queryFn: async () => {
-      if (!debouncedSearch) {
+      if (!debouncedSearch || debouncedSearch.length < 3) {
         return [];
       }
 
@@ -62,7 +62,7 @@ const useSearch = () => {
       >,
     ) => {
       toast.success("conversation created");
-      dispatch(setConversation(response.data.data.id));
+      dispatch(setConversation(response.data.data));
       route.push("/");
     },
   });

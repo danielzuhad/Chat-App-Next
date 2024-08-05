@@ -41,11 +41,11 @@ const UserList = React.memo(({ users, isLoading }: UserListProps) => {
           showIcon={true}
           showEmail={true}
           className={cn(
-            "mb-5 w-28 rounded-sm border-[1px] md:w-max md:py-2",
+            "mb-5 w-28 rounded-[8px] border-[1px] sm:w-max sm:py-1.5 md:w-max md:py-2",
             conversationMutattionPending &&
               "animate-pulse bg-card-hover hover:cursor-progress",
           )}
-          classNameImage="sm:w-[60%] bg-black/50 md:w-[5em] lg:w-[5em] xl:w-[5em]"
+          classNameImage="sm:w-[3em] md:w-[3em] lg:w-[3.5em] 2xl:w-[4em]  2xl:h-[4em]  rounded-[8px]  bg-black/50 "
         />
       ))}
 

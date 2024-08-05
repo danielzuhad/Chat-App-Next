@@ -3,13 +3,16 @@ import LoadingUserList from "../../box/Loading/LoadingUserList";
 import { Session } from "next-auth";
 import { ConversationWithRelationsType } from "@/type/type";
 import UserBox from "../../box/UserBox";
+import { useDispatch, useSelector } from "react-redux";
+import { setConversation } from "@/redux/features/chat/chatSlice";
 import useChat from "../hooks/useChat";
+import { RootState } from "@/redux/store/store";
 
 interface ChatListProps {
   conversations: ConversationWithRelationsType[];
   currentUser: Session;
   loadingList: boolean;
-  conversationId: string | null;
+  conversationState: ConversationWithRelationsType | null;
 }
 
 const ChatList = React.memo(
@@ -17,11 +20,27 @@ const ChatList = React.memo(
     conversations,
     currentUser,
     loadingList,
-    conversationId,
+    conversationState,
   }: ChatListProps) => {
-    const { handleSetConversationId } = useChat(conversationId);
+    const { getConversationByIdMutation } = useChat();
 
-    // console.log("list rendered");
+    const conversationId = useSelector(
+      (state: RootState) => state.chat.conversation?.id,
+    );
+
+    const dispatch = useDispatch();
+
+    const handleSetConversationId = React.useCallback(
+      (conversation: ConversationWithRelationsType) => {
+        if (conversationId === conversation.id) {
+          return;
+        } else {
+          dispatch(setConversation(conversation));
+          getConversationByIdMutation.mutate(conversation?.id);
+        }
+      },
+      [conversationId, dispatch, getConversationByIdMutation],
+    );
 
     return (
       <>
@@ -33,15 +52,15 @@ const ChatList = React.memo(
           ) : (
             conversations.map((conversation, i) => (
               <UserBox
-                onClick={() => handleSetConversationId(conversation.id)}
+                onClick={() => handleSetConversationId(conversation)}
                 key={i}
-                className={`${conversationId === conversation.id && "bg-card-hover"} `}
+                className={`${conversationState?.id === conversation.id && "bg-card-hover"} `}
                 user={conversation.users.find(
                   (user) => user.name !== currentUser.user?.name,
                 )}
-                classNameImage="bg-black/50"
-                showLastMessage={false}
-                showEmail={true}
+                classNameImage="bg-black/10 sm:w-10 max-md:h-10 "
+                showLastMessage={true}
+                showEmail={false}
               />
             ))
           )}

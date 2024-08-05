@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 
 export const getConversationById = async (id: string) => {
   try {
-    const conversation = await db.message.findFirst({
+    const conversation = await db.message.findMany({
       where: {
         conversationId: id,
       },
