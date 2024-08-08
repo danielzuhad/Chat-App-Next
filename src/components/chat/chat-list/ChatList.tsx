@@ -66,4 +66,6 @@ const ChatList = React.memo(
   },
 );
 
+ChatList.displayName = "ChatList";
+
 export default ChatList;

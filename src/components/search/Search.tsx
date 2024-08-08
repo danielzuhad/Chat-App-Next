@@ -37,4 +37,6 @@ const Search = React.memo(
   },
 );
 
+Search.displayName = "Search";
+
 export default Search;

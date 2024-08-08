@@ -82,4 +82,6 @@ const UserBox = React.memo(
   },
 );
 
+UserBox.displayName = "UserBox";
+
 export default UserBox;

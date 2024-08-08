@@ -32,4 +32,6 @@ const HeaderChat = memo(({ user }: HeaderChatProps) => {
   );
 });
 
+HeaderChat.displayName = "HeaderChat";
+
 export default HeaderChat;

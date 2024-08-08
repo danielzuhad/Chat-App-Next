@@ -29,12 +29,12 @@ const UserList = React.memo(({ users, isLoading }: UserListProps) => {
 
   return (
     <div className="flex w-full flex-wrap justify-around gap-2">
-      {users?.map((user) => (
+      {users?.map((user, index) => (
         <UserBox
           onClick={() =>
             memoizedHandleConversation(user.id, user.name as string)
           }
-          key={user.id} // Use a unique identifier as key
+          key={index}
           user={user}
           showLastMessage={false}
           showBorder={false}
@@ -53,5 +53,7 @@ const UserList = React.memo(({ users, isLoading }: UserListProps) => {
     </div>
   );
 });
+
+UserList.displayName = "UserList";
 
 export default UserList;
