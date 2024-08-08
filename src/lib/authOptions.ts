@@ -33,35 +33,29 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize(credentials) {
-        const validatedCredentials = loginSchema.safeParse(credentials);
+        try {
+          const validatedCredentials = loginSchema.safeParse(credentials);
 
-        if (validatedCredentials.success) {
-          const { email } = validatedCredentials.data;
+          if (validatedCredentials.success) {
+            const { email } = validatedCredentials.data;
 
-          const user = await db.user.findUnique({
-            where: {
-              email,
-            },
-          });
+            const user = await db.user.findUnique({
+              where: { email },
+            });
 
-          if (!user) {
-            throw new Error("You are not registered");
+            if (!user) {
+              throw new Error("You are not registered");
+            }
+
+            return user;
+          } else {
+            throw new Error("Missing email or password");
           }
-
-          return user;
-        } else {
-          throw new Error("Missing email or password");
+        } catch (error) {
+          console.error("Authorization error:", error);
+          throw new Error("Authorization failed");
         }
       },
     }),
   ],
-
-  callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      if (account && account.provider === "google") {
-        return true;
-      }
-      return true; // Allow sign in
-    },
-  },
 };
