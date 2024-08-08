@@ -1,20 +1,19 @@
+import { getCurrentUser } from "@/actions/getCurrentUserAction";
 import ChatSection from "@/components/chat/chat-list/ChatSection";
 import LayoutWrapper from "@/layout/LayoutWrapper";
-import { authOptions } from "@/lib/authOptions";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
+  const currentUser = await getCurrentUser();
 
-  if (!session) {
+  if (!currentUser) {
     redirect("/login");
   }
 
   return (
     <>
       <LayoutWrapper className="h-full flex-row sm:h-full">
-        <ChatSection session={session} />
+        <ChatSection currentUser={currentUser} />
       </LayoutWrapper>
     </>
   );

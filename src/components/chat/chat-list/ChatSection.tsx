@@ -1,21 +1,21 @@
 "use client";
 
-import { Session } from "next-auth";
+import { User } from "@prisma/client";
 import UserChatSection from "../user-chat/UserChatSection";
 import SearchChatSection from "./SearchChatSection";
 
 interface ChatSectionProps {
-  session: Session;
+  currentUser: User;
 }
 
-const ChatSection = ({ session }: ChatSectionProps) => {
+const ChatSection = ({ currentUser }: ChatSectionProps) => {
   return (
     <>
       {/* <SearchChatSection currentUser={session} /> */}
 
-      <SearchChatSection currentUser={session} />
+      <SearchChatSection currentUser={currentUser} />
 
-      <UserChatSection currentuser={session} />
+      <UserChatSection currentuser={currentUser} />
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { ConversationWithRelationsType } from "@/type/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import moment from "moment";
 
 interface ChatState {
   conversation: ConversationWithRelationsType | null;
@@ -19,12 +20,11 @@ const chatSlice = createSlice({
     ) => {
       state.conversation = {
         ...action.payload,
-        createdAt: action.payload.createdAt.toString(),
-        lastMessageAt: action.payload.lastMessageAt.toString(),
+        createdAt: moment(action.payload.createdAt).toISOString(),
+        lastMessageAt: moment(action.payload.lastMessageAt).toISOString(),
       };
     },
   },
 });
-
 export const { setConversation } = chatSlice.actions;
 export default chatSlice.reducer;

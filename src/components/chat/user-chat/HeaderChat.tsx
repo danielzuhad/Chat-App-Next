@@ -10,12 +10,12 @@ interface HeaderChatProps {
 const HeaderChat = memo(({ user }: HeaderChatProps) => {
   return (
     <>
-      <div className="absolute flex w-full gap-x-2 rounded-[6px] border-[1px] border-slate-50 bg-[rgb(249,249,249)]/50 p-2 shadow-sm backdrop-blur-sm">
+      <div className="absolute flex w-full gap-x-2 border-b-[1px] border-slate-50 bg-[rgb(249,249,249)]/50 p-2 px-4 shadow-sm backdrop-blur-md">
         {/* Image */}
         <img
           src={userConditional("image", user as User)}
           alt="profile"
-          className="aspect-square h-14 w-14 rounded-full"
+          className="aspect-square h-12 w-12 rounded-full"
         />
 
         {/* Information */}

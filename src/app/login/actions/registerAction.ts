@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 import { loginSchema, registerSchema } from "@/schemas";
 import { z } from "zod";
 import { signIn } from "next-auth/react";

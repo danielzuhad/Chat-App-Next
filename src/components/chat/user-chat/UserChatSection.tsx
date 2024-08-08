@@ -3,10 +3,10 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import BlankChat from "./BlankChat";
 import UserChat from "./UserChat";
-import { Session } from "next-auth";
+import { User } from "@prisma/client";
 
 export interface UserChatSectionProps {
-  currentuser: Session;
+  currentuser: User;
 }
 
 const UserChatSection = ({ currentuser }: UserChatSectionProps) => {
@@ -15,17 +15,15 @@ const UserChatSection = ({ currentuser }: UserChatSectionProps) => {
   );
 
   const anotherUser = useMemo(() => {
-    return conversation?.users.find(
-      (user) => user.name !== currentuser?.user?.name,
-    );
+    return conversation?.users.find((user) => user.id !== currentuser?.id);
   }, [conversation]);
 
   return (
-    <div className="h-full w-full rounded-[6px] border-[1px] p-2">
+    <div className="h-full w-full rounded-[6px] border-[1px]">
       {conversation ? (
         <UserChat
           conversation={conversation}
-          user={anotherUser ? anotherUser : null}
+          currentUser={anotherUser as User}
         />
       ) : (
         <BlankChat />

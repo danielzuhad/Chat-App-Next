@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/actions/getCurrentUserAction";
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 import { User } from "@prisma/client";
 import { NextResponse } from "next/server";
 

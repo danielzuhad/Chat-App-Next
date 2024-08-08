@@ -1,16 +1,15 @@
 import React from "react";
 import LoadingUserList from "../../box/Loading/LoadingUserList";
-import { Session } from "next-auth";
 import { ConversationWithRelationsType } from "@/type/type";
 import UserBox from "../../box/UserBox";
 import { useDispatch, useSelector } from "react-redux";
 import { setConversation } from "@/redux/features/chat/chatSlice";
-import useChat from "../hooks/useChat";
 import { RootState } from "@/redux/store/store";
+import { User } from "@prisma/client";
 
 interface ChatListProps {
   conversations: ConversationWithRelationsType[];
-  currentUser: Session;
+  currentUser: User;
   loadingList: boolean;
   conversationState: ConversationWithRelationsType | null;
 }
@@ -22,8 +21,6 @@ const ChatList = React.memo(
     loadingList,
     conversationState,
   }: ChatListProps) => {
-    const { getConversationByIdMutation } = useChat();
-
     const conversationId = useSelector(
       (state: RootState) => state.chat.conversation?.id,
     );
@@ -36,10 +33,9 @@ const ChatList = React.memo(
           return;
         } else {
           dispatch(setConversation(conversation));
-          getConversationByIdMutation.mutate(conversation?.id);
         }
       },
-      [conversationId, dispatch, getConversationByIdMutation],
+      [conversationId, dispatch],
     );
 
     return (
@@ -56,11 +52,11 @@ const ChatList = React.memo(
                 key={i}
                 className={`${conversationState?.id === conversation.id && "bg-card-hover"} `}
                 user={conversation.users.find(
-                  (user) => user.name !== currentUser.user?.name,
+                  (user) => user.name !== currentUser.name,
                 )}
                 classNameImage="bg-black/10 sm:w-10 max-md:h-10 "
-                showLastMessage={true}
-                showEmail={false}
+                showLastMessage={false}
+                showEmail={true}
               />
             ))
           )}

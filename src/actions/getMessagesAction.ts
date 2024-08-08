@@ -1,8 +1,8 @@
 "use server";
 
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 
-export const getConversationById = async (id: string) => {
+export const getMessages = async (id: string) => {
   try {
     const conversation = await db.message.findMany({
       where: {

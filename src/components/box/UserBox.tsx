@@ -41,21 +41,21 @@ const UserBox = React.memo(
                 src={userConditional("image", user as User) as string}
                 alt=""
                 className={cn(
-                  "mb-0.5 aspect-square w-[60%] rounded-[4px] object-cover sm:w-[30%] sm:rounded-full md:h-[3em] md:w-[3em]",
+                  "mb-0.5 aspect-square w-[75%] rounded-[4px] object-cover sm:w-[30%] sm:rounded-full md:h-[3em] md:w-[3em]",
                   classNameImage,
                 )}
               />
             )}
             <div className="flex h-full w-full flex-col justify-between py-2 sm:pl-2">
               {/* Name */}
-              <p className="line-clamp-2 w-full text-start text-xs font-semibold leading-3 text-primary/70 md:text-base">
+              <p className="line-clamp-2 w-[90%] text-start text-xs font-semibold leading-3 text-primary/70 md:text-base">
                 {showContent &&
                   (userConditional("name", user as User) as string)}
               </p>
 
               {/* Email */}
               {showEmail && (
-                <div className="line-clamp-1 w-full text-[10px] font-medium text-primary/40">
+                <div className="line-clamp-2 w-full pt-0.5 text-[10px] font-medium text-primary/40">
                   {showEmail &&
                     (userConditional("email", user as User) as string)}
                 </div>

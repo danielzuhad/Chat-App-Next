@@ -1,21 +1,18 @@
-import { getConversationById } from "@/actions/getConversationByIdAction";
-import { useMutation } from "@tanstack/react-query";
+import { getMessages } from "@/actions/getMessagesAction";
+import { useQuery } from "@tanstack/react-query";
 
-const useChat = () => {
+const useChat = (conversationId: string) => {
   // fetch conversations by id
-  const getConversationByIdMutation = useMutation({
-    mutationFn: async (conversationId: string) => {
-      if (!conversationId) {
-        return null;
-      }
-
-      const response = await getConversationById(conversationId);
+  const mesasgeQuery = useQuery({
+    queryKey: ["messages", conversationId],
+    queryFn: async () => {
+      const response = await getMessages(conversationId);
       return response;
     },
   });
 
   return {
-    getConversationByIdMutation,
+    mesasgeQuery,
   };
 };
 

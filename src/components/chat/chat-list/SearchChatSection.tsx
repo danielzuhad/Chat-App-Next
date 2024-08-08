@@ -1,12 +1,12 @@
-import { Session } from "next-auth";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import useSearchChat from "../hooks/useSearchChat";
 import ChatList from "./ChatList";
 import Search from "@/components/search/Search";
+import { User } from "@prisma/client";
 
 interface SearchChatSectionProps {
-  currentUser: Session;
+  currentUser: User;
 }
 
 const SearchChatSection = ({ currentUser }: SearchChatSectionProps) => {
@@ -20,10 +20,8 @@ const SearchChatSection = ({ currentUser }: SearchChatSectionProps) => {
     conversationId ?? null,
   );
 
-  console.log("search chat section rendered");
-
   return (
-    <div className="flex h-full w-28 flex-col items-center overflow-y-hidden pr-[2px] max-sm:border-b-[1px] sm:w-[220px] sm:pr-0 md:w-[320px] lg:w-[450px] xl:w-[460px] 2xl:w-[550px]">
+    <div className="flex h-full w-20 flex-col items-center overflow-y-hidden pr-[2px] max-sm:border-b-[1px] sm:w-[220px] sm:pr-0 md:w-[320px] lg:w-[450px] xl:w-[460px] 2xl:w-[550px]">
       <div className="mb-4 w-full px-1.5 max-md:hidden">
         <Search
           setSearch={setSearch}
