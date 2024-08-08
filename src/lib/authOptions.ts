@@ -15,7 +15,6 @@ export const authOptions: NextAuthOptions = {
   },
 
   pages: {
-    error: "/login",
     signIn: "/login",
   },
 
@@ -58,4 +57,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        return true; // Allow Google sign-in
+      }
+      return true; // Allow other sign-ins
+    },
+  },
 };
