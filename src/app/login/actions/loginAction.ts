@@ -24,7 +24,7 @@ export const login = async (data: z.infer<typeof loginSchema>) => {
     });
 
     if (response?.error) {
-      toast.error("Invalid credentials");
+      toast.error(response.error);
     }
 
     if (response?.ok) {

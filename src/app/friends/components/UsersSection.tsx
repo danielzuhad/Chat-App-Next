@@ -15,15 +15,13 @@ const UsersSection = ({
   const noUsersFound = !isLoading && debouncedSearch && users?.length === 0;
 
   return (
-    <>
-      <div className="mt-10 flex w-full justify-center">
-        {noUsersFound ? (
-          <p className="text-primary/50">Tidak ada user ditemukan</p>
-        ) : (
-          <UserList isLoading={isLoading} users={users} />
-        )}
-      </div>
-    </>
+    <div className="mt-10 flex w-full justify-center">
+      {noUsersFound ? (
+        <p className="text-primary/50">Tidak ada user ditemukan</p>
+      ) : (
+        <UserList isLoading={isLoading} users={users} />
+      )}
+    </div>
   );
 };
 

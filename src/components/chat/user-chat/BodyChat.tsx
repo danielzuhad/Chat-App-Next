@@ -35,8 +35,6 @@ const BodyChat = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  console.log(submitMutation.variables);
-
   useEffect(() => {
     if (mesasgeQuery.data) {
       setMessages(mesasgeQuery.data);
@@ -77,38 +75,36 @@ const BodyChat = ({
   }, [conversationId, messages]);
 
   return (
-    <>
-      <div
-        ref={containerRef}
-        className="max-h-[calc(100vh-135px)] w-full flex-1 overflow-y-auto px-2 pt-[74px]"
-      >
-        {messages?.map((message, i) => (
-          <MessageBox
-            variant={message.senderId !== currentuser.id ? "right" : "left"}
-            key={i}
-            message={message}
-          />
-        ))}
+    <div
+      ref={containerRef}
+      className="max-h-[calc(100vh-135px)] w-full flex-1 overflow-y-auto px-2 pt-[74px]"
+    >
+      {messages?.map((message, i) => (
+        <MessageBox
+          variant={message.senderId !== currentuser.id ? "right" : "left"}
+          key={i}
+          message={message}
+        />
+      ))}
 
-        {submitMutation.isPending && (
-          <MessageBox
-            className="bg-black/50"
-            variant="right"
-            message={{
-              body: submitMutation.variables?.message as string,
-              image: submitMutation.variables?.image as string,
-              senderId: currentuser.id,
-              sender: currentuser,
-              conversationId: conversationId,
-              createdAt: new Date(),
-              id: "",
-              seen: [],
-              seenIds: [],
-            }}
-          />
-        )}
-      </div>
-    </>
+      {submitMutation.isPending && (
+        <MessageBox
+          className="bg-black/50"
+          variant="right"
+          message={{
+            body: submitMutation.variables?.message as string,
+            image: submitMutation.variables?.image as string,
+            senderId: currentuser.id,
+            sender: currentuser,
+            conversationId: conversationId,
+            createdAt: new Date(),
+            id: "",
+            seen: [],
+            seenIds: [],
+          }}
+        />
+      )}
+    </div>
   );
 };
 

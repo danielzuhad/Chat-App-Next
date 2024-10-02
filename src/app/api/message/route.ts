@@ -63,21 +63,29 @@ export async function POST(request: Request) {
       },
     });
 
+    const conversation = await db.conversation.findUnique({
+      where: {
+        id: conversationId,
+      },
+      include: {
+        users: true,
+        messages: {
+          include: { seen: true },
+        },
+      },
+    });
+
     await pusherServer.trigger(conversationId, "messages:new", newMessage);
 
     const lastMessage =
       updateConversation.messages[updateConversation.messages.length - 1];
 
     updateConversation.users.map((user) => {
-      pusherServer.trigger(user.email!, "conversation:update", {
-        id: conversationId,
-        messages: [lastMessage],
-      });
+      pusherServer.trigger(user.email!, "conversation:update", conversation);
     });
 
     return NextResponse.json(newMessage);
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },

@@ -8,6 +8,7 @@ import LayoutWrapper from "@/layout/LayoutWrapper";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import ReduxWrapper from "@/components/chat/context/ReduxWrapper";
+import SessionWrapper from "@/context/SessionWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,12 +35,14 @@ export default async function RootLayout({
         <body
           className={`${poppins.className} flex min-h-screen w-full items-center justify-center bg-[#f8f8f8]`}
         >
-          <ToastifyWrapper>
-            <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
-              {session?.user?.name && <Navbar />}
-              <ReduxWrapper>{children}</ReduxWrapper>
-            </LayoutWrapper>
-          </ToastifyWrapper>
+          <SessionWrapper>
+            <ToastifyWrapper>
+              <LayoutWrapper className="flex-col-reverse border-2 border-[#ffffff] bg-background sm:flex-row sm:p-2">
+                {session?.user?.name && <Navbar />}
+                <ReduxWrapper>{children}</ReduxWrapper>
+              </LayoutWrapper>
+            </ToastifyWrapper>
+          </SessionWrapper>
         </body>
       </QueryWrapper>
     </html>

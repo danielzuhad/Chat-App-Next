@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
           const validatedCredentials = loginSchema.safeParse(credentials);
 
           if (validatedCredentials.success) {
-            const { email } = validatedCredentials.data;
+            const { email, password } = validatedCredentials.data;
 
             const user = await db.user.findUnique({
               where: { email },
@@ -46,13 +46,17 @@ export const authOptions: NextAuthOptions = {
               throw new Error("You are not registered");
             }
 
+            if (user.password !== password) {
+              throw new Error("Incorrect credentials");
+            }
+
             return user;
           } else {
             throw new Error("Missing email or password");
           }
         } catch (error) {
           console.error("Authorization error:", error);
-          throw new Error("Authorization failed");
+          throw error;
         }
       },
     }),

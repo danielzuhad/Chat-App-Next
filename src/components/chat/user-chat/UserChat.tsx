@@ -15,24 +15,18 @@ const UserChat = ({ currentUser, conversation }: UserChatProps) => {
     conversation?.id as string,
   );
   return (
-    <>
-      <div className="relative h-full w-full">
-        <HeaderChat user={currentUser} />
+    <div className="relative h-full w-full">
+      <HeaderChat user={currentUser} />
 
-        <div className="flex h-full w-full flex-col justify-between">
-          <BodyChat
-            submitMutation={submitMutation}
-            currentuser={currentUser}
-            conversationId={conversation?.id as string}
-          />
-          <FormChat
-            form={form}
-            handleUpload={handleUpload}
-            onSubmit={onSubmit}
-          />
-        </div>
+      <div className="flex h-full w-full flex-col justify-between">
+        <BodyChat
+          submitMutation={submitMutation}
+          currentuser={currentUser}
+          conversationId={conversation?.id as string}
+        />
+        <FormChat form={form} handleUpload={handleUpload} onSubmit={onSubmit} />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -10,13 +10,11 @@ interface ChatSectionProps {
 
 const ChatSection = ({ currentUser }: ChatSectionProps) => {
   return (
-    <>
-      {/* <SearchChatSection currentUser={session} /> */}
-
+    <div className="flex h-full w-full">
       <SearchChatSection currentUser={currentUser} />
 
       <UserChatSection currentuser={currentUser} />
-    </>
+    </div>
   );
 };
 

@@ -7,11 +7,8 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { login } from "../actions/loginAction";
 import { signIn } from "next-auth/react";
-import { usePathname } from "next/navigation";
 
 const useLogin = () => {
-  const path = usePathname();
-
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {

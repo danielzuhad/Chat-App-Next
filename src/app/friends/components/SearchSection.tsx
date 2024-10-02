@@ -9,20 +9,16 @@ const SearchSection = () => {
 
   const { data, isLoading, status } = searchQuery;
 
-  console.log({ data });
-
   return (
-    <>
-      <div className="mt-5 w-full">
-        <Search setSearch={setSearch} placeholder="at least 3 letters" />
+    <div className="mt-5 w-full">
+      <Search setSearch={setSearch} placeholder="at least 3 letters" />
 
-        <UsersSection
-          debouncedSearch={debouncedSearch}
-          users={data}
-          isLoading={isLoading}
-        />
-      </div>
-    </>
+      <UsersSection
+        debouncedSearch={debouncedSearch}
+        users={data}
+        isLoading={isLoading}
+      />
+    </div>
   );
 };
 

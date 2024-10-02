@@ -11,10 +11,8 @@ export default async function Home() {
   }
 
   return (
-    <>
-      <LayoutWrapper className="h-full flex-row sm:h-full">
-        <ChatSection currentUser={currentUser} />
-      </LayoutWrapper>
-    </>
+    <LayoutWrapper className="h-full flex-row sm:h-full">
+      <ChatSection currentUser={currentUser} />
+    </LayoutWrapper>
   );
 }

@@ -13,25 +13,21 @@ const Login = async () => {
   }
 
   return (
-    <>
-      <LayoutWrapper>
-        {/* Tittle */}
-        <div className="w-full flex flex-col items-center justify-center">
-          <div className="w-full flex justify-center items-center gap-1.5">
-            <IoChatbubblesOutline size={27} />
-            <h1 className="font-semibold text-3xl lg:text-4xl">
-              Chat Next App
-            </h1>
-          </div>
-
-          <p className="font-light text-black/70 text-sm">
-            &quot;Threads of Words, Weaving Souls Together&quot;
-          </p>
+    <LayoutWrapper>
+      {/* Tittle */}
+      <div className="flex w-full flex-col items-center justify-center">
+        <div className="flex w-full items-center justify-center gap-1.5">
+          <IoChatbubblesOutline size={27} />
+          <h1 className="text-3xl font-semibold lg:text-4xl">Chat Next App</h1>
         </div>
 
-        <FormSection />
-      </LayoutWrapper>
-    </>
+        <p className="text-sm font-light text-black/70">
+          &quot;Threads of Words, Weaving Souls Together&quot;
+        </p>
+      </div>
+
+      <FormSection />
+    </LayoutWrapper>
   );
 };
 

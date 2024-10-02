@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import LoadingUserList from "@/components/box/Loading/LoadingUserList";
 import UserBox from "@/components/box/UserBox";
 import { User } from "@prisma/client";
 import useSearch from "../hooks/useSearch";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 
 interface UserListProps {
   users: User[] | undefined;
@@ -11,7 +12,10 @@ interface UserListProps {
 }
 
 const UserList = React.memo(({ users, isLoading }: UserListProps) => {
+  const [user, setUser] = useState<User[]>([]);
+
   const { handleConversation, conversationMutattionPending } = useSearch();
+  const { data: session } = useSession();
 
   const memoizedHandleConversation = React.useCallback(
     (userId: string, userName: string) => {
