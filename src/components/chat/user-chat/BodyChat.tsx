@@ -81,15 +81,16 @@ const BodyChat = ({
     >
       {messages?.map((message, i) => (
         <MessageBox
-          variant={message.senderId !== currentuser.id ? "right" : "left"}
           key={i}
+          variant={message.senderId !== currentuser.id ? "right" : "left"}
           message={message}
         />
       ))}
 
       {submitMutation.isPending && (
         <MessageBox
-          className="bg-black/50"
+          isPending={submitMutation.isPending}
+          className="bg-black/30"
           variant="right"
           message={{
             body: submitMutation.variables?.message as string,

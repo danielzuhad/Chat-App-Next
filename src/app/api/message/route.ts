@@ -10,6 +10,12 @@ export async function POST(request: Request) {
 
     const { message, image, conversationId } = body;
 
+    const existingMessages = await db.message.count({
+      where: {
+        conversationId: conversationId,
+      },
+    });
+
     const newMessage = await db.message.create({
       data: {
         body: message,
@@ -80,9 +86,30 @@ export async function POST(request: Request) {
     const lastMessage =
       updateConversation.messages[updateConversation.messages.length - 1];
 
-    updateConversation.users.map((user) => {
-      pusherServer.trigger(user.email!, "conversation:update", conversation);
-    });
+    if (existingMessages === 0) {
+      const conversation = await db.conversation.findUnique({
+        where: {
+          id: conversationId,
+        },
+        include: {
+          users: true,
+          messages: {
+            include: { seen: true },
+          },
+        },
+      });
+
+      updateConversation.users.forEach((user) => {
+        pusherServer.trigger(user.email!, "conversation:update", conversation);
+      });
+    } else {
+      updateConversation.users.forEach((user) => {
+        pusherServer.trigger(user.email!, "conversation:update", {
+          id: conversationId,
+          messages: [lastMessage],
+        });
+      });
+    }
 
     return NextResponse.json(newMessage);
   } catch (error) {
